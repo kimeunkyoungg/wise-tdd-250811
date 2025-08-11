@@ -1,4 +1,4 @@
-package com.back;
+package com.back.standard.util;
 
 import java.io.*;
 import java.util.Scanner;
