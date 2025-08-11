@@ -41,7 +41,43 @@ public class AppTest {
                 """);
 
         assertThat(out).contains("1번 명언이 등록되었습니다.");
+    }
+
+    @Test
+    @DisplayName("등록할때마다 생성되는 명언번호가 증가")
+    void t4(){
+
+        String out = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                현재를 사랑하라.
+                작자미상
+                """);
 
 
+        assertThat(out).contains("2번 명언이 등록되었습니다.");
+    }
+
+    @Test
+    @DisplayName("목록 출력")
+    void t5(){
+
+        String out = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                현재를 사랑하라.
+                작자미상
+                목록
+                """);
+
+
+        assertThat(out).contains("번호 / 작가 / 명언");
+        assertThat(out).contains("----------------------");
+        assertThat(out).contains("2 / 작자미상 / 현재를 사랑하라.");
+        assertThat(out).contains("1 / 작자미상 / 현재를 사랑하라.");
     }
 }
