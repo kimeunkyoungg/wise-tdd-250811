@@ -1,0 +1,1 @@
+rootProject.name = "wise-tdd-250811"
