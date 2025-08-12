@@ -39,6 +39,7 @@ public class WiseSayingRepository {
     public List<WiseSaying> findByContentContainingDesc(String kw, int pageSize, int pageNo) {
         return wiseSayings.reversed().stream()
                 .filter(w -> w.getSaying().contains(kw))
+                .skip((pageNo-1)*pageSize)
                 .limit(pageSize) // 페이징 구현. filter 밑으로 들어가야함
                 .toList();
         // return wiseSayings.reversed(); //필터링을 하고 목록 보여지도록 수정해야함
@@ -48,6 +49,7 @@ public class WiseSayingRepository {
     public List<WiseSaying> findByAuthorContainingDesc(String kw, int pageSize, int pageNo) {
         return wiseSayings.reversed().stream()
                 .filter(w -> w.getAuthor().contains(kw))
+                .skip((pageNo-1)*pageSize)
                 .limit(pageSize) // 페이징 구현. filter 밑으로 들어가야함
                 .toList();
     }
@@ -55,6 +57,7 @@ public class WiseSayingRepository {
     public List<WiseSaying>  findByContentContainingOrAuthorContainingDesc(String kw, int pageSize, int pageNo) {
         return wiseSayings.reversed().stream()
                 .filter(w -> w.getAuthor().contains(kw) || w.getSaying().contains(kw))
+                .skip((pageNo-1)*pageSize)
                 .limit(pageSize) // 페이징 구현. filter 밑으로 들어가야함
                 .toList();
     }
