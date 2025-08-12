@@ -37,25 +37,25 @@ public class WiseSayingRepository {
 
     //content 검색
     public List<WiseSaying> findByContentContainingDesc(String kw) {
-        return wiseSayings.stream()
+        return wiseSayings.reversed().stream()
                 .filter(w -> w.getSaying().contains(kw))
-                .toList()
-                .reversed();
+                .limit(5) // 페이징 구현. filter 밑으로 들어가야함
+                .toList();
         // return wiseSayings.reversed(); //필터링을 하고 목록 보여지도록 수정해야함
     }
 
     //author 검색
     public List<WiseSaying> findByAuthorContainingDesc(String kw) {
-        return wiseSayings.stream()
+        return wiseSayings.reversed().stream()
                 .filter(w -> w.getAuthor().contains(kw))
-                .toList()
-                .reversed();
+                .limit(5) // 페이징 구현. filter 밑으로 들어가야함
+                .toList();
     }
 
     public List<WiseSaying>  findByContentContainingOrAuthorContainingDesc(String kw) {
-        return wiseSayings.stream()
+        return wiseSayings.reversed().stream()
                 .filter(w -> w.getAuthor().contains(kw) || w.getSaying().contains(kw))
-                .toList()
-                .reversed();
+                .limit(5) // 페이징 구현. filter 밑으로 들어가야함
+                .toList();
     }
 }

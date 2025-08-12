@@ -4,6 +4,9 @@ import com.back.AppTestRunner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WiseSayingControllerTest {
@@ -218,6 +221,34 @@ public class WiseSayingControllerTest {
         assertThat(out)
                 .contains("1 / 작자미상 / 현재를 사랑하라.")
                 .doesNotContain("2 / 매용 / 과거에 집착하지 마라");
+
+    }
+
+    //페이징 기능 구현 시작
+    @Test
+    @DisplayName("목록 : 한 페이지에 최신 명언 5개 출력")
+    void t12(){
+
+        //샘플 데이터 만들어줌
+        String input = IntStream.rangeClosed(1,10)
+                .mapToObj(num -> """
+                        등록
+                        명언 %d
+                        작가 %d
+                        """.formatted(num,num))
+                .collect(Collectors.joining("\n"));//문자열 여러개 나왔을때 합쳐줌
+
+        input += "목록\n";
+
+        String out = AppTestRunner.run(input);
+
+
+        assertThat(out)
+                .contains("10 / 작가 10 / 명언 10")
+                .contains("6 / 작가 6 / 명언 6")
+                .doesNotContain("1 / 작가 1 / 명언 1");
+
+
 
     }
 }
