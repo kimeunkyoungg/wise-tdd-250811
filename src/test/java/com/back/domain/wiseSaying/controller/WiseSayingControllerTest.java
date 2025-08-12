@@ -62,7 +62,7 @@ public class WiseSayingControllerTest {
                 현재를 사랑하라.
                 작자미상
                 등록
-                현재를 사랑하라.
+                과거에 집착하지 마라.
                 작자미상
                 목록
                 """);
@@ -70,7 +70,52 @@ public class WiseSayingControllerTest {
 
         assertThat(out).contains("번호 / 작가 / 명언");
         assertThat(out).contains("----------------------");
-        assertThat(out).contains("2 / 작자미상 / 현재를 사랑하라.");
+        assertThat(out).contains("2 / 작자미상 / 과거에 집착하지 마라.");
         assertThat(out).contains("1 / 작자미상 / 현재를 사랑하라.");
+    }
+
+    @Test
+    @DisplayName("삭제?id=1")
+    void t5(){
+
+        String out = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                과거에 집착하지 마라.
+                작자미상
+                삭제?id=1
+                목록
+                """);
+
+
+        assertThat(out)
+                .contains("1번 명언이 삭제되었습니다.")
+                .contains("2 / 작자미상 / 과거에 집착하지 마라.")
+                .doesNotContain("1 / 작자미상 / 현재를 사랑하라.");
+
+    }
+
+    @Test
+    @DisplayName("삭제?id=1 두 번 요청에 대한 처리")
+    void t6(){
+
+        String out = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                과거에 집착하지 마라.
+                작자미상
+                삭제?id=1
+                삭제?id=1
+                """);
+
+
+        assertThat(out)
+                .contains("1번 명언이 삭제되었습니다.")
+                .contains("1번 명언은 존재하지 않습니다.");
+
     }
 }

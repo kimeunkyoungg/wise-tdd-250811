@@ -15,6 +15,7 @@ public class WiseSayingService {
         this.wiseSayingRepository = AppContext.wiseSayingRepository;
     }
 
+
     public WiseSaying write(String saying, String author){
 
         WiseSaying wiseSaying = new WiseSaying(saying, author);
@@ -26,5 +27,10 @@ public class WiseSayingService {
 
     public List<WiseSaying> findListDesc() {
         return wiseSayingRepository.findListDesc();
+    }
+
+
+    public boolean delete(int id) {
+        return wiseSayingRepository.delete(id);
     }
 }
