@@ -37,10 +37,13 @@ public class WiseSayingController {
         String kw = rq.getParam("keyword", "");
         String kwType = rq.getParam("keywordType", "");
 
+        int pageSize = 5; //페이징 개수
+        int pageNo = 1; //현재 페이지 번호
+
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(kw, kwType); //원래는 목록 다 보여주도록
+        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(kw, kwType, pageSize, pageNo); //원래는 목록 다 보여주도록
         wiseSayings
                 .stream()
                 .forEach(wiseSaying -> System.out.printf("%d / %s / %s%n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getSaying()));

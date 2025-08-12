@@ -25,12 +25,12 @@ public class WiseSayingService {
 
     }
 
-    public List<WiseSaying> findListDesc(String kw, String kwtype) {
+    public List<WiseSaying> findListDesc(String kw, String kwtype, int pageSize, int pageNo) {
 
         return switch (kwtype){
-            case "content" -> wiseSayingRepository.findByContentContainingDesc(kw);
-            case "author" ->wiseSayingRepository.findByAuthorContainingDesc(kw);
-            default -> wiseSayingRepository.findByContentContainingOrAuthorContainingDesc(kw);
+            case "content" -> wiseSayingRepository.findByContentContainingDesc(kw, pageSize, pageNo);
+            case "author" ->wiseSayingRepository.findByAuthorContainingDesc(kw, pageSize, pageNo);
+            default -> wiseSayingRepository.findByContentContainingOrAuthorContainingDesc(kw, pageSize, pageNo);
         };
 
     }
