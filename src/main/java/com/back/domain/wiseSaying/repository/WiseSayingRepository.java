@@ -19,13 +19,20 @@ public class WiseSayingRepository {
         return wiseSaying;
     }
 
+    public List<WiseSaying> findListDesc(String kw) {
+        return wiseSayings.stream()
+                .filter(w -> w.getSaying().contains(kw))
+                .toList()
+                .reversed();
+        // return wiseSayings.reversed(); //필터링을 하고 목록 보여지도록 수정해야함
+    }
+
+
     public boolean delete(int id){
         return wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
     }
 
-    public List<WiseSaying> findListDesc() {
-        return wiseSayings.reversed();
-    }
+
 
     public WiseSaying findByIdOrNull(int id) {
         return wiseSayings.stream()

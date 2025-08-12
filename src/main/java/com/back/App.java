@@ -33,7 +33,7 @@ public class App {
             switch (action){
                 case "등록" -> wiseSayingController.actionAdd();
                 //assertThat(out).contains("2 / 작자미상 / 현재를 사랑하라.");
-                case "목록" ->  wiseSayingController.actionList();
+                case "목록" ->  wiseSayingController.actionList(rq);
 
                 case "삭제" -> wiseSayingController.actionDelete(rq);
 
