@@ -37,6 +37,8 @@ public class App {
 
                 case "삭제" -> wiseSayingController.actionDelete(rq);
 
+                case "수정" -> wiseSayingController.actionModify(rq);
+
                 case "종료" ->{
                     systemController.actionExit();
                     return;

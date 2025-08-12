@@ -26,4 +26,11 @@ public class WiseSayingRepository {
     public List<WiseSaying> findListDesc() {
         return wiseSayings.reversed();
     }
+
+    public WiseSaying findByIdOrNull(int id) {
+        return wiseSayings.stream()
+                .filter(wiseSaying -> wiseSaying.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
 }
