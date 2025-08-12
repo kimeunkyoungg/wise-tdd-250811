@@ -178,6 +178,7 @@ public class WiseSayingControllerTest {
 
     }
 
+    //step13
     @Test
     @DisplayName("목록?keywordType=content&keyword=작자")
     void t10(){
