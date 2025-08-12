@@ -158,8 +158,29 @@ public class WiseSayingControllerTest {
     }
 
     @Test
-    @DisplayName("목록?keyword=과거")
+    @DisplayName("목록?keyword=이순신")
     void t9(){
+
+        String out = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                이순신
+                등록
+                과거에 집착하지 마라
+                이순신
+                목록?&keyword=이순신
+                """);
+
+
+        assertThat(out)
+                .contains("1 / 이순신 / 현재를 사랑하라.")
+                .contains("2 / 이순신 / 과거에 집착하지 마라");
+
+    }
+
+    @Test
+    @DisplayName("목록?keywordType=content&keyword=작자")
+    void t10(){
 
         String out = AppTestRunner.run("""
                 등록
@@ -168,13 +189,34 @@ public class WiseSayingControllerTest {
                 등록
                 과거에 집착하지 마라
                 작자미상
-                목록?&keyword=과거
+                목록?keywordType=content&keyword=작자
                 """);
 
 
         assertThat(out)
                 .doesNotContain("1 / 작자미상 / 현재를 사랑하라.")
-                .contains("2 / 작자미상 / 과거에 집착하지 마라");
+                .doesNotContain("2 / 작자미상 / 과거에 집착하지 마라");
+
+    }
+
+    @Test
+    @DisplayName("목록?keywordType=author&keyword=작자")
+    void t11(){
+
+        String out = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                과거에 집착하지 마라
+                매용
+                목록?keywordType=author&keyword=작자
+                """);
+
+
+        assertThat(out)
+                .contains("1 / 작자미상 / 현재를 사랑하라.")
+                .doesNotContain("2 / 매용 / 과거에 집착하지 마라");
 
     }
 }

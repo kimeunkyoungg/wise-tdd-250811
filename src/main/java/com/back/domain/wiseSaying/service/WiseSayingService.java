@@ -25,8 +25,14 @@ public class WiseSayingService {
 
     }
 
-    public List<WiseSaying> findListDesc(String kw) {
-        return wiseSayingRepository.findListDesc(kw);
+    public List<WiseSaying> findListDesc(String kw, String kwtype) {
+
+        return switch (kwtype){
+            case "content" -> wiseSayingRepository.findByContentContainingDesc(kw);
+            case "author" ->wiseSayingRepository.findByAuthorContainingDesc(kw);
+            default -> wiseSayingRepository.findByContentContainingOrAuthorContainingDesc(kw);
+        };
+
     }
 
 

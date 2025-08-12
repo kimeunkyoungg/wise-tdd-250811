@@ -33,13 +33,14 @@ public class WiseSayingController {
 
     public void actionList(Rq rq){
 
-        String kwtype = rq.getParam("keywordType", "");
+
         String kw = rq.getParam("keyword", "");
+        String kwType = rq.getParam("keywordType", "");
 
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(kw); //원래는 목록 다 보여주도록
+        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(kw, kwType); //원래는 목록 다 보여주도록
         wiseSayings
                 .stream()
                 .forEach(wiseSaying -> System.out.printf("%d / %s / %s%n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getSaying()));

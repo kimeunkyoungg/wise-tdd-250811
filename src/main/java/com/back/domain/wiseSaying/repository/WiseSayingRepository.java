@@ -19,13 +19,7 @@ public class WiseSayingRepository {
         return wiseSaying;
     }
 
-    public List<WiseSaying> findListDesc(String kw) {
-        return wiseSayings.stream()
-                .filter(w -> w.getSaying().contains(kw))
-                .toList()
-                .reversed();
-        // return wiseSayings.reversed(); //필터링을 하고 목록 보여지도록 수정해야함
-    }
+
 
 
     public boolean delete(int id){
@@ -39,5 +33,29 @@ public class WiseSayingRepository {
                 .filter(wiseSaying -> wiseSaying.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    //content 검색
+    public List<WiseSaying> findByContentContainingDesc(String kw) {
+        return wiseSayings.stream()
+                .filter(w -> w.getSaying().contains(kw))
+                .toList()
+                .reversed();
+        // return wiseSayings.reversed(); //필터링을 하고 목록 보여지도록 수정해야함
+    }
+
+    //author 검색
+    public List<WiseSaying> findByAuthorContainingDesc(String kw) {
+        return wiseSayings.stream()
+                .filter(w -> w.getAuthor().contains(kw))
+                .toList()
+                .reversed();
+    }
+
+    public List<WiseSaying>  findByContentContainingOrAuthorContainingDesc(String kw) {
+        return wiseSayings.stream()
+                .filter(w -> w.getAuthor().contains(kw) || w.getSaying().contains(kw))
+                .toList()
+                .reversed();
     }
 }
