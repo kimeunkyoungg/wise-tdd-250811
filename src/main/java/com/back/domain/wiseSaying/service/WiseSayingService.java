@@ -1,10 +1,9 @@
 package com.back.domain.wiseSaying.service;
 
 import com.back.AppContext;
+import com.back.PageDto;
 import com.back.domain.wiseSaying.entity.WiseSaying;
 import com.back.domain.wiseSaying.repository.WiseSayingRepository;
-
-import java.util.List;
 
 //비즈니스 로직
 public class WiseSayingService {
@@ -25,7 +24,7 @@ public class WiseSayingService {
 
     }
 
-    public List<WiseSaying> findListDesc(String kw, String kwtype, int pageSize, int pageNo) {
+    public PageDto findListDesc(String kw, String kwtype, int pageSize, int pageNo) {
 
         return switch (kwtype){
             case "content" -> wiseSayingRepository.findByContentContainingDesc(kw, pageSize, pageNo);

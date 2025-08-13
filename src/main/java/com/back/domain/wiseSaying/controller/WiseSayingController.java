@@ -1,11 +1,11 @@
 package com.back.domain.wiseSaying.controller;
 
 import com.back.AppContext;
+import com.back.PageDto;
 import com.back.Rq;
 import com.back.domain.wiseSaying.entity.WiseSaying;
 import com.back.domain.wiseSaying.service.WiseSayingService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
@@ -38,13 +38,14 @@ public class WiseSayingController {
         String kwType = rq.getParam("keywordType", "");
 
         int pageSize = rq.getParamAsInt("pageSize", 5); //페이징 개수
-        int pageNo = rq.getParamAsInt("page", 1); //현재 페이지
+        int page = rq.getParamAsInt("page", 1); //현재 페이지
 
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(kw, kwType, pageSize, pageNo); //원래는 목록 다 보여주도록
-        wiseSayings
+        PageDto pageDto = wiseSayingService.findListDesc(kw, kwType, pageSize, page); //원래는 목록 다 보여주도록
+
+        pageDto.getContent()
                 .stream()
                 .forEach(wiseSaying -> System.out.printf("%d / %s / %s%n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getSaying()));
 
