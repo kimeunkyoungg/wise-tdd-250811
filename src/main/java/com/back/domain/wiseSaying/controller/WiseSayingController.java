@@ -7,6 +7,8 @@ import com.back.domain.wiseSaying.entity.WiseSaying;
 import com.back.domain.wiseSaying.service.WiseSayingService;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class WiseSayingController {
 
@@ -49,6 +51,16 @@ public class WiseSayingController {
                 .stream()
                 .forEach(wiseSaying -> System.out.printf("%d / %s / %s%n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getSaying()));
 
+        // 1 / [2] 형식의 페이지 메뉴 생성
+        System.out.println("----------------------");
+
+        int totalPageCnt = pageDto.getTotalPageCnt();
+        int currentPageNo = pageDto.getPage(); //현재 보고 있는 페이지 []로 나와야함
+
+        String pageMenu = IntStream.rangeClosed(1, totalPageCnt)
+                        .mapToObj(i -> i == currentPageNo ? "[%d]". formatted(i) : String.valueOf(i))
+                                .collect(Collectors.joining(" / "));
+        System.out.println("페이지 : " + pageMenu);
     }
 
     public void actionDelete(Rq rq) {

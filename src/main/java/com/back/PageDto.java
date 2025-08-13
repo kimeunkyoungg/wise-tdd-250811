@@ -18,4 +18,13 @@ public class PageDto {
     private int pageSize; //페이지 당 아이템 수
     private int totalItems; //전체 아이템 수
     private List<WiseSaying> content;
+
+    public int getTotalPageCnt() {
+        if(totalItems == 0) {
+            return 0;
+        }
+
+        return (int) Math.ceil((double)totalItems / pageSize) ;
+        //페이지가 딱 나눠떨어지지 않으면 2.xx로 나오면 3으로 해야하므로 올림을 해준다
+    }
 }
