@@ -3,7 +3,7 @@ package com.back;
 
 //레포지토리에서 페이지에 관련된 정보를 가져오기 위한 클래스
 //아이템 == 명언
-
+//페이징
 import com.back.domain.wiseSaying.entity.WiseSaying;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
